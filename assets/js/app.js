@@ -73,13 +73,14 @@ let cardsWon = [];
 
 // button to start the game
 document.querySelector('#start').addEventListener('click', function () {
+    document.querySelector('#start').style.display = 'none';
     // function to create the game
     function createBoard() {
         for (let i = 0; i < cardArray.length; i++) {
             let card = document.createElement('img');
             card.setAttribute('src', 'assets/img/card.png');
             card.setAttribute('data-id', i.toString());
-            card.addEventListener("click", flipCard);
+            card.addEventListener('click', flipCard);
             grid.appendChild(card);
         }
     }
@@ -101,10 +102,12 @@ document.querySelector('#start').addEventListener('click', function () {
         }
         cardsChosen = [];
         cardsChosenId = [];
-        resultDisplay.textContent = cardsWon.length.toString();
+        resultDisplay.innerHTML = cardsWon.length.toString();
         // victory condition if there are no more cards left
         if (cardsWon.length === cardArray.length / 2) {
-            resultDisplay.textContent = 'Félicitation, tu as gagné !';
+            resultDisplay.innerHTML = 'Félicitation, tu as gagné !';
+            document.querySelector('#restart').style.display = 'block';
+
         }
     }
 
@@ -118,4 +121,9 @@ document.querySelector('#start').addEventListener('click', function () {
         }
     }
     createBoard();
+})
+
+// button restart game
+document.querySelector('#restart').addEventListener('click', function() {
+    location.reload();
 })
